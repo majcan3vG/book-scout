@@ -1,0 +1,1 @@
+`focus-visible:ring-blue-400 focus-visible:ring-1 focus-visible:border-blue-400`
