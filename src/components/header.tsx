@@ -61,7 +61,7 @@ function Header() {
           onClick={handleGoHome}
         >
           <BookIcon />
-          <Typography className={"text-white"} text={"Book Scout"} />
+          <Typography className={"text-white"} text={"Book Genie"} />
         </div>
         <div className="flex flex-row items-center align-middle space-x-2">
           <Input

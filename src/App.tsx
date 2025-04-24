@@ -18,8 +18,8 @@ function App() {
       setBooks(fetched);
       setLoading(false);
     }
-    if (books?.length <= 0 || !books?.length) loadBooks();
-  }, [books, setBooks, setLoading]);
+    loadBooks();
+  }, []);
 
   return (
     <div className="flex flex-col min-h-svh bg-[#1C1B22]">

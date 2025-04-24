@@ -13,7 +13,6 @@ import {
 } from "./ui/dialog";
 import { Typography } from "./ui/typography";
 import { Button } from "./ui/button";
-import { useState } from "react";
 
 export function BookList() {
   const { books } = useBookStore();
