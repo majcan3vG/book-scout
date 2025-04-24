@@ -17,7 +17,6 @@ export function BookCard({
     <Card className={cn(
       "w-[350px] h-full bg-gray-200 border-2 border-gray-200 justify-between",
       "group hover:bg-white hover:cursor-pointer hover:border-4 hover:border-[#77aaff]",
-      "active:bg-[#00695C] active:border-[#00695C]",
     )}>
       <CardHeader>
           <div className="flex items-center justify-center">

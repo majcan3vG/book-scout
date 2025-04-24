@@ -13,6 +13,7 @@ import {
 } from "./ui/dialog";
 import { Typography } from "./ui/typography";
 import { Button } from "./ui/button";
+import AnimatedDiv from "./ui/animatedDiv";
 
 export function BookList() {
   const { books } = useBookStore();
@@ -22,13 +23,13 @@ export function BookList() {
       {books.map((book: customBookItem) => (
         <Dialog>
           <DialogTrigger asChild>
-            <div className={"min-h-auto"}>
+            <AnimatedDiv>
               <BookCard
                 bookAuthor={book.author}
                 bookCoverURL={book.coverUrl}
                 bookTitle={book.title}
               />
-            </div>
+            </AnimatedDiv>
           </DialogTrigger>
           <DialogContent className="w-full">
             <DialogHeader>

@@ -7,9 +7,8 @@ import { BookList } from './components/bookList';
 import { Spinner } from './components/icons/spinner';
 import MoodList from './components/moodList';
 import { Toaster } from './components/ui/toaster';
-
 function App() {
-  const { books, loading, setBooks, setLoading } = useBookStore();
+  const { loading, setBooks, setLoading } = useBookStore();
 
   useEffect(() => {
     async function loadBooks() {
