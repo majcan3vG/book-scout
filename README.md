@@ -1,5 +1,1 @@
-```
-const { searchTerm, setSearchTerm, moodFilters, toggleMood } = useBookStore()
-
-focus-visible:ring-blue-400 focus-visible:ring-1 focus-visible:border-blue-400
-```
+A test project to test the use of [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction) and [Shadcn](https://ui.shadcn.com/)
