@@ -8,6 +8,8 @@ interface Book {
   author: string;
   coverUrl: string;
   description: string;
+  infoLink: string;
+  pageCount: number;
 }
 
 interface BookStore {

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useBookStore } from '@/store/bookStore';
-import { searchGoogleBooks } from '@/lib/googleBooksApi';
+import { fetchGoogleBooks, searchGoogleBooks } from '@/lib/googleBooksApi';
 import { BookIcon } from "./icons/bookIcon";
 import { Typography } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
@@ -12,12 +12,39 @@ function Header() {
   const {
     searchTerm,
     setBooks,
+    setCurrentMood,
     setLoading,
     setSearchTerm
   } = useBookStore();
 
+  const handleGoHome = async () => {
+    setLoading(true);
+    setCurrentMood(null);
+    const books = await fetchGoogleBooks();
+    setBooks(books);
+    setLoading(false);
+  };
+
   const handleSearch = async () => {
+    setCurrentMood(null);
     if (isNotValidSearchTerm(searchTerm, 2)) {
+      toast.warning('No searchterm provided.',{
+        actionButtonStyle: { backgroundColor: "hsl(31, 92%, 45%)", },
+        action: {
+          label: "Close",
+          onClick: () => console.log("Closing toast..."),
+        },
+      });
+      setLoading(true);
+      const books = await fetchGoogleBooks();
+      setBooks(books);
+      setLoading(false);
+    } else if (searchTerm) {
+      setLoading(true);
+      const books = await searchGoogleBooks(searchTerm);
+      setBooks(books);
+      setLoading(false);
+    } else {
       toast.error('Could not search for books. Please try again.',{
         actionButtonStyle: { backgroundColor: "hsl(360, 100%, 45%)", },
         action: {
@@ -25,18 +52,16 @@ function Header() {
           onClick: () => console.log("Closing toast..."),
         },
       });
-    } else {
-      setLoading(true);
-      const books = await searchGoogleBooks(searchTerm);
-      setBooks(books);
-      setLoading(false);
     }
   };
 
   return (
     <div className="flex flex-row p-4">
       <div className="flex flex-row w-full max-w-small items-center justify-between">
-        <div className="flex flex-row items-center align-middle space-x-[-1px] space-y-[-2.5px]">
+        <div
+          className="flex flex-row items-center align-middle space-x-[-1px] space-y-[-2.5px] cursor-pointer"
+          onClick={handleGoHome}
+        >
           <BookIcon />
           <Typography className={"text-white"} text={"Book Scout"} />
         </div>

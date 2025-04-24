@@ -15,21 +15,21 @@ export function BookCard({
 }: BookCardProps) {
   return (
     <Card className={cn(
-      "w-[350px] min-h-auto bg-[#2A2A32] border-[#2A2A32] drop-shadow-md drop-shadow-gray-700",
-      "hover:bg-[#414150] hover:cursor-pointer hover:border-[#414150]",
+      "w-[350px] h-full bg-gray-200 border-2 border-gray-200",
+      "group hover:bg-white hover:cursor-pointer hover:border-4 hover:border-[#77aaff]",
       "active:bg-[#00695C] active:border-[#00695C]",
     )}>
       <CardHeader>
           <div className="flex items-center justify-center">
             {bookCoverURL ?
               <img src={bookCoverURL} alt={bookTitle} className="rounded-md h-full" /> :
-              <div className="p-14"><BookIcon width={60} height={60} /></div>
+              <div className="p-14"><BookIcon color={"#2A2A32"} width={60} height={60} /></div>
             }
           </div>
       </CardHeader>
       <CardContent>
-        <CardTitle className="truncate pb-2 text-white">{bookTitle}</CardTitle>
-        <CardDescription className="text-[#A1A1AA]">{bookAuthor}</CardDescription>
+        <CardTitle className="truncate pb-2 text-[#00695C] group-hover:text-[#77aaff]">{bookTitle}</CardTitle>
+        <CardDescription className="text-[#65656b] group-hover:text-[#2A2A32]">{bookAuthor}</CardDescription>
       </CardContent>
     </Card>
   );
