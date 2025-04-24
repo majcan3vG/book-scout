@@ -10,3 +10,4 @@ This app allows you to search for a book by title, ISBN, or author. It also retu
 - Tailwind
 - Shadcn ui
 - Vite
+- Motion
