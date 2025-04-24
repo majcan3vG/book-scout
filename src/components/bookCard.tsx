@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { BookIcon } from "./icons/bookIcon";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
 type BookCardProps = {
   bookAuthor: string | undefined;
@@ -14,17 +15,17 @@ export function BookCard({
   bookTitle
 }: BookCardProps) {
   return (
-    <Card className={cn(
-      "w-[350px] h-full bg-gray-200 border-2 border-gray-200 justify-between",
-      "group hover:bg-white hover:cursor-pointer hover:border-4 hover:border-[#77aaff]",
-    )}>
+    <Card
+      className={cn(
+        "w-[350px] h-full bg-gray-200 border-2 border-gray-200 justify-between",
+        "group hover:bg-white hover:cursor-pointer hover:border-4 hover:border-[#77aaff]",
+      )}
+    >
       <CardHeader>
-          <div className="flex items-center justify-center">
-            {bookCoverURL ?
-              <img src={bookCoverURL} alt={bookTitle} className="rounded-md h-full" /> :
-              <div className="p-14"><BookIcon color={"#2A2A32"} width={60} height={60} /></div>
-            }
-          </div>
+        <Avatar className="flex justify-center items-center">
+          <AvatarImage className={"rounded-xl size-36"} src={bookCoverURL} />
+          <AvatarFallback><BookIcon color={"#2A2A32"} width={60} height={60} /></AvatarFallback>
+        </Avatar>
       </CardHeader>
       <CardContent>
         <CardTitle className="truncate pb-2 text-[#00695C] group-hover:text-[#77aaff]">{bookTitle}</CardTitle>

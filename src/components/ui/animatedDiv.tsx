@@ -1,14 +1,16 @@
 import { motion } from "motion/react";
 
 type AnimatedProps = {
+  className?: string,
   hoverScale?: number | undefined,
   tapScale?: number | undefined,
   children: React.ReactNode;
 }
 
-const AnimatedDiv = ({ children, hoverScale = 1.05, tapScale = 0.95 }: AnimatedProps) => {
+const AnimatedDiv = ({ className, children, hoverScale = 1.05, tapScale = 0.95 }: AnimatedProps) => {
   return (
     <motion.div
+      className={className}
       whileHover={{ 
         scale: hoverScale,
         transition: { duration: 0.2, ease: "easeInOut" }

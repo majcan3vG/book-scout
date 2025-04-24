@@ -19,11 +19,11 @@ export function BookList() {
   const { books } = useBookStore();
 
   return (
-    <div className="grid grid-cols-3 gap-8 mt-8">
-      {books.map((book: customBookItem) => (
-        <Dialog>
-          <DialogTrigger asChild>
-            <AnimatedDiv>
+    <div className="grid grid-cols-3 gap-8">
+      {books.map((book: customBookItem, index: number) => (
+        <Dialog key={index}>
+          <DialogTrigger>
+            <AnimatedDiv className="h-full">
               <BookCard
                 bookAuthor={book.author}
                 bookCoverURL={book.coverUrl}
@@ -31,7 +31,7 @@ export function BookList() {
               />
             </AnimatedDiv>
           </DialogTrigger>
-          <DialogContent className="w-full">
+          <DialogContent className="w-full bg-white">
             <DialogHeader>
               <div className="flex flex-row justify-between items-center pt-8">
                 <DialogTitle>{book.title}</DialogTitle>
@@ -39,12 +39,16 @@ export function BookList() {
               </div>
               <Typography text={book.author} className={"font-light text-sm"}/>
             </DialogHeader>
-            <DialogFooter>
-              <div className="flex flex-col space-y-4 items-center">
-                <DialogDescription>{book.description}</DialogDescription>
-                <div className="flex flex-row w-full items-center justify-between">
-                  <DialogClose asChild><Button variant={'outline'}>Close</Button></DialogClose>
-                  <Button asChild>
+            <DialogFooter className="grid grid-cols-1 space-y-4">
+              <DialogDescription>{book.description}</DialogDescription>
+              <div className="flex flex-row justify-end space-x-4">
+                <DialogClose>
+                  <AnimatedDiv>
+                    <Button className="cursor-pointer" variant={'outline'}>Close</Button>
+                  </AnimatedDiv>
+                </DialogClose>
+                <AnimatedDiv>
+                  <Button className="bg-[#2A2A32] text-white cursor-pointer">
                     {book.infoLink.length > 0 ?
                       <a
                         href={book.infoLink}
@@ -55,7 +59,7 @@ export function BookList() {
                       </a> : null
                     }
                   </Button>
-                </div>
+                </AnimatedDiv>
               </div>
             </DialogFooter>
           </DialogContent>
