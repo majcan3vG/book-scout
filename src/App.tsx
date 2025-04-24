@@ -20,7 +20,7 @@ function App() {
     }
 
     if (books.length <= 0) loadBooks();
-  }, [books, setBooks, setLoading])
+  }, [books, setBooks, setLoading]);
 
   return (
     <div className="flex flex-col min-h-svh bg-[#1C1B22]">

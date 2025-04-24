@@ -71,6 +71,8 @@ export type customBookItem = {
   author: string,
   coverUrl: string,
   description: string,
+  infoLink: string,
+  pageCount: number,
 }
 
 export type mooodInfo = {

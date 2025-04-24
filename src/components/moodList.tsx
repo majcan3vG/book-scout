@@ -1,14 +1,20 @@
 import { moodToKeywords } from "@/constants/constants";
 import { Badge } from "./ui/badge";
-import { fetchBooksByMood } from "@/lib/googleBooksApi";
+import { fetchBooksByMood, getRelatedWord } from "@/lib/googleBooksApi";
 import { useBookStore } from "@/store/bookStore";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 
 function MoodList() {
-  const { curentMood, setBooks, setCurrentMood, setLoading, setSearchTerm } = useBookStore();
+  const {
+    curentMood,
+    setBooks,
+    setCurrentMood,
+    setLoading,
+    setSearchTerm
+  } = useBookStore();
 
-  const handleClick = async (searchTerms: string[], mood: string) => {
+  const handleClick = async ( mood: string) => {
     setLoading(true);
     setSearchTerm(undefined);
     if (mood === curentMood) {
@@ -16,7 +22,8 @@ function MoodList() {
     } else {
       setCurrentMood(mood);
     }
-    const fetched = await fetchBooksByMood(searchTerms);
+    const moodWords = await getRelatedWord(mood);
+    const fetched = await fetchBooksByMood(moodWords);
     setBooks(fetched);
     setLoading(false);
   }
@@ -26,7 +33,7 @@ function MoodList() {
       <div className="flex flex-row w-full max-w-small items-center justify-center-safe space-x-2">
         {Object.keys(moodToKeywords).map((key) => (
           <Button
-            onClick={() => handleClick(moodToKeywords[key].queryTerms, key)}
+            onClick={() => handleClick(key)}
           >
             <Badge
               variant={"secondary"}
