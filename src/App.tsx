@@ -1,16 +1,35 @@
-import './App.css'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { SearchIcon } from './components/icons/SearchIcon'
+import './App.css';
+import { fetchGoogleBooks } from './lib/googleBooksApi';
+import { useEffect } from 'react';
+import { useBookStore } from './store/bookStore';
+import Header from './components/header';
+import { BookList } from './components/bookList';
+import { Spinner } from './components/icons/spinner';
+import MoodList from './components/moodList';
+import { Toaster } from './components/ui/toaster';
 
 function App() {
+  const { books, loading, setBooks, setLoading } = useBookStore();
+
+  useEffect(() => {
+    async function loadBooks() {
+      setLoading(true);
+      const books = await fetchGoogleBooks();
+      setBooks(books);
+      setLoading(false);
+    }
+
+    if (books.length <= 0) loadBooks();
+  }, [books, setBooks, setLoading])
+
   return (
-    <div className="flex flex-row items-center justify-center min-h-svh">
-      <div className="flex w-full max-w-small space-x-2 items-center">
-        <SearchIcon />
-        <Input className="w-100" type="search" placeholder="Search" />
+    <div className="flex flex-col min-h-svh bg-[#1C1B22]">
+      <Header />
+      <MoodList />
+      <div className="flex items-center justify-center w-full py-8">
+        {loading ? <Spinner /> :<BookList />}
       </div>
-      <Button>Click me</Button>
+      <Toaster richColors theme='light' position="bottom-center" />
     </div>
   )
 }
