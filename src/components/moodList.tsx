@@ -33,6 +33,7 @@ function MoodList() {
       <div className="flex flex-row w-full max-w-small items-center justify-center-safe space-x-2">
         {Object.keys(moodToKeywords).map((key) => (
           <Button
+            className="bg-opacity-0"
             onClick={() => handleClick(key)}
           >
             <Badge
