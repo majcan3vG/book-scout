@@ -16,14 +16,13 @@ import { useState } from "react";
 
 export function BookList() {
   const { books } = useBookStore();
-  const [open, setOpen] = useState(false);
 
   return (
     <div className="grid grid-cols-3 gap-8 mt-8">
       {books.map((book: customBookItem) => (
-        <Dialog open={open}>
+        <Dialog>
           <DialogTrigger asChild>
-            <div className={"min-h-auto"} onClick={() => setOpen(true)}>
+            <div className={"min-h-auto"}>
               <BookCard
                 bookAuthor={book.author}
                 bookCoverURL={book.coverUrl}
@@ -43,7 +42,7 @@ export function BookList() {
               <div className="flex flex-col space-y-4 items-center">
                 <DialogDescription>{book.description}</DialogDescription>
                 <div className="flex flex-row w-full items-center justify-between">
-                  <Button variant={'outline'} onClick={() => setOpen(false)}>Close</Button>
+                  <Button variant={'outline'}>Close</Button>
                   <Button asChild>
                     {book.infoLink.length > 0 ?
                       <a
