@@ -25,7 +25,6 @@ export async function searchGoogleBooks(search: string) {
     `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(search)}&key=${apiKey}&maxResults=9`
   );
   const data = await res.json();
-  console.log("DATA", data);
   return data.items?.slice(0, 20).map((item: GoogleBookItem) => ({
     id: item.id,
     title: item.volumeInfo.title,

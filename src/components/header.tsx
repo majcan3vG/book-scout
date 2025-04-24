@@ -28,17 +28,15 @@ function Header() {
   const handleSearch = async () => {
     setCurrentMood(null);
     if (isNotValidSearchTerm(searchTerm, 2)) {
-      toast.warning('No searchterm provided.',{
+      toast.warning('Cannot use this search term',{
+        description: "Please try again.",
         actionButtonStyle: { backgroundColor: "hsl(31, 92%, 45%)", },
         action: {
           label: "Close",
           onClick: () => console.log("Closing toast..."),
         },
       });
-      setLoading(true);
-      const books = await fetchGoogleBooks();
-      setBooks(books);
-      setLoading(false);
+      setSearchTerm(undefined);
     } else if (searchTerm) {
       setLoading(true);
       const books = await searchGoogleBooks(searchTerm);
@@ -70,7 +68,7 @@ function Header() {
             className="w-100 bg-white text-[#3F3F46] font-semibold"
             type="search"
             placeholder="Search"
-            value={searchTerm}
+            value={searchTerm ? searchTerm : ''}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {

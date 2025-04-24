@@ -14,12 +14,11 @@ function App() {
   useEffect(() => {
     async function loadBooks() {
       setLoading(true);
-      const books = await fetchGoogleBooks();
-      setBooks(books);
+      const fetched = await fetchGoogleBooks();
+      setBooks(fetched);
       setLoading(false);
     }
-
-    if (books.length <= 0) loadBooks();
+    if (books?.length <= 0 || !books?.length) loadBooks();
   }, [books, setBooks, setLoading]);
 
   return (
@@ -29,7 +28,7 @@ function App() {
       <div className="flex items-center justify-center w-full py-8">
         {loading ? <Spinner /> :<BookList />}
       </div>
-      <Toaster richColors theme='light' position="bottom-center" />
+      <Toaster richColors theme='light' position="top-center" />
     </div>
   )
 }

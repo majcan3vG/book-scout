@@ -3,6 +3,7 @@ import { useBookStore } from "@/store/bookStore";
 import { BookCard } from "./bookCard";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -42,7 +43,7 @@ export function BookList() {
               <div className="flex flex-col space-y-4 items-center">
                 <DialogDescription>{book.description}</DialogDescription>
                 <div className="flex flex-row w-full items-center justify-between">
-                  <Button variant={'outline'}>Close</Button>
+                  <DialogClose asChild><Button variant={'outline'}>Close</Button></DialogClose>
                   <Button asChild>
                     {book.infoLink.length > 0 ?
                       <a

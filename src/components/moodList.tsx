@@ -1,6 +1,6 @@
 import { moodToKeywords } from "@/constants/constants";
 import { Badge } from "./ui/badge";
-import { fetchBooksByMood, getRelatedWord } from "@/lib/googleBooksApi";
+import { fetchBooksByMood, fetchGoogleBooks, getRelatedWord } from "@/lib/googleBooksApi";
 import { useBookStore } from "@/store/bookStore";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
@@ -16,14 +16,16 @@ function MoodList() {
 
   const handleClick = async ( mood: string) => {
     setLoading(true);
+    let fetched;
     setSearchTerm(undefined);
     if (mood === curentMood) {
       setCurrentMood(null);
+      fetched = await fetchGoogleBooks();
     } else {
       setCurrentMood(mood);
+      const moodWords = await getRelatedWord(mood);
+      fetched = await fetchBooksByMood(moodWords);
     }
-    const moodWords = await getRelatedWord(mood);
-    const fetched = await fetchBooksByMood(moodWords);
     setBooks(fetched);
     setLoading(false);
   }
